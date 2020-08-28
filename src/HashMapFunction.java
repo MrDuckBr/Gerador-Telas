@@ -1,0 +1,49 @@
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.TilePane;
+
+public class HashMapFunction {
+	private TelaJavaFX main;
+	private Map<String,Scene> hash; // alterar depois para private ,mudei para testes
+	
+	
+	public HashMapFunction(TelaJavaFX main) {
+		this.main = main;
+		hash = new HashMap<>();
+	}
+	
+
+	public void setInsertionHash(String Screen_name , TilePane tile) { // acredito que esteja certo
+		hash.put(Screen_name, new Scene(tile));
+	}
+	
+	public Scene getHashScene(String name) {
+		if(hash.containsKey(name)){
+			return hash.get(name);
+		}else {
+			return null;
+		}	
+	}
+	
+	public void ChangeScene(String name) {
+		if(getHashScene(name) != null){
+			main.MudarCena(hash.get(name));
+			main.MudarNomeCena(name);
+			
+		}else {
+			Alert AlertaMudarCena = new Alert(AlertType.ERROR);
+			AlertaMudarCena.setContentText(name);
+			AlertaMudarCena.show();
+		}
+	}
+	
+}
+	
+
