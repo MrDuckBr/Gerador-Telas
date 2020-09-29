@@ -2,6 +2,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.text.MutableAttributeSet;
+
 
 //extend => HERANCA  -> descendencia de um individuo/ancestral
 public class TelaJavaFX extends Application{
@@ -18,8 +20,8 @@ public class TelaJavaFX extends Application{
 		jsonH = new JsonHash(hs); // adicionei as cenas criadas aqui no hash map
 		// adicionar tratamento de excecao para todos os casos
 		hs.setInsertionHash("cenaPrincipal",new PrincipalLayout(hs));
-		hs.ChangeScene("cenaPrincipal");
-		
+		MudarCena(hs.getHashScene("qualquercoisa"));
+
 	
 		primaryStage.setResizable(true);
 		primaryStage.show();

@@ -1,98 +1,78 @@
 import org.json.simple.*;
-
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.*;
-/*
- * Nessa classe irei criar a tel com base nos valores do json passado a mim
- * 
- * Nome da tela;
- * NumBotoes
- * for dos botoes
- * 	botao = nome
- * 	botao = funcao
- *Lista com os botoes
- *
- *Descobrir como abrir arquivo json
- * 
- *
- *TRATAR ERROS DE MANEIRA CORRETA <-------------
- *
- */
 
 
 public class JsonHash {
 	//criar as telas e depois mandar inserir no hash map la na main
 	private JSONObject json;
 	private JSONParser parser = new JSONParser();
-	private ArrayList<String> botoes;
-	private ArrayList<String> funcoes;
+	private ArrayList<String> bottoms;
+	private ArrayList<String> functions;
 	HashMapFunction hash;
-	
+
+
 	/*Abrir arquivo no proprio codigo */
 	
 	//TA ERRADISSIMO , NAO TA FUNCIONANDO NO ARQUIVO JSON
 	public JsonHash(HashMapFunction hash) throws ParseException {
 		this.hash = hash;
-		botoes = new ArrayList<>();
-		funcoes = new ArrayList<>();
-		String a;
-		String b;
-		String c;
-		
+		bottoms = new ArrayList<>();
+		functions = new ArrayList<>();
 		try {
-			json = (JSONObject) parser.parse(new FileReader("C:\\teste.json")); /// NAO TA FUNCIONANDO PQQQQQQQ
-			a  = (String)json.get("nome");
-			b = (String) json.get("valor");
-			c = (String) json.get("tast");
-			
-			System.out.print(a + b + c);
-			
-			// PORQUE ESSE PARSER NAO FUNCIONA ????
-		}catch (FileNotFoundException e) {
-			e.printStackTrace();
-			//adicionar parada , sem sentido continuar
-		}catch (IOException e) {
+			json = (JSONObject) parser.parse(new FileReader("C:\\teste.json"));
+			System.out.println(json);
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		getTitle();
+
+
+		insertBottomList();
+		insertFunctionList();
+		setScene();
 	}
 	
 	
-	public void  getTitle()  {
-		
-		System.out.println((String)json.get("nomeCena"));
+	public String getTitle()  {
+
+		return (String)json.get("title");
+
 	}
 	
-	public void insereBotaoLista() throws JSONException {// DA PRA COLOCAR ARRAY , MAS AINDA NAO TESTEI ESSA MODIFICACAO
-		for (int i = 0; i < (int)tamLista(); i++) {
-			botoes.add(json.getString("botao"+new Integer(i).toString())); // ANALISAR DEPOIS
+	public void insertBottomList()  {// DA PRA COLOCAR ARRAY , MAS AINDA NAO TESTEI ESSA MODIFICACAO
+		JSONArray jsonArray = (JSONArray) json.get("bottom");
+		for (Object o : jsonArray) {
+			System.out.println(o);
+			bottoms.add((String) o);
 		}
-		
-		
-		
+	System.out.println(bottoms);
 	}
-	public void insereFuncaoLista() throws JSONException{ // metodo que pega a funcao dos botoes;
-		for (int i = 0; i < (int)tamLista(); i++) {
-			funcoes.add(json.getString("funcao"+i));
+
+
+	public void insertFunctionList(){ // metodo que pega a funcao dos botoes;
+		JSONArray jsonArray = (JSONArray) json.get("function");
+		for (Object o : jsonArray) {
+			System.out.println(o);
+			functions.add((String) o);
 		}
+		System.out.println(functions);
 	}
 	
-	
-	public int tamLista() throws JSONException {
-		return  (int)json.getInt("NumeroBotoes");
-	}  	
 	
 
 	
-	public void setScene() throws JSONException {
-			hash.setInsertionHash(getTitle() , new TilePane1(botoes,funcoes,this));
+
+	
+	public void setScene()  {
+
+			hash.setInsertionHash(getTitle() , new TilePane1(bottoms,functions,this,hash));
 		
 	}
 	
