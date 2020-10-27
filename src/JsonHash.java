@@ -55,8 +55,8 @@ public class JsonHash {
 	public void insertBottomList() throws ParseException {// DA PRA COLOCAR ARRAY , MAS AINDA NAO TESTEI ESSA MODIFICACAO
 		JSONArray jsonArray = (JSONArray) json.get("creator");
 		for (Object o : jsonArray) { // Tenho o array de objetos do "creator" , eu tenho meu array quebrado
-			System.out.println(o.toString());
-			System.out.println("-------------------");
+			//System.out.println(o.toString());
+			//System.out.println("-------------------");
 			JSONObject arrayScene = (JSONObject) parser.parse(o.toString()); // nesse parse eu transformo em JSOn
 			setTitle(arrayScene.get("Scene").toString());
 			createScene(arrayScene);
@@ -70,7 +70,7 @@ public class JsonHash {
 			JSONObject teste = (JSONObject) parser.parse(a.toString());
 			if (teste.get("type").equals("Cena")) {
 				bottoms.add((String) teste.get("text"));
-				System.out.println(teste.get("text") + " Impressao do text");
+				//System.out.println(teste.get("text") + " Impressao do text");
 			}
 			//	System.out.println(teste.get("text"));
 		}

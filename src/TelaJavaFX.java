@@ -19,7 +19,7 @@ public class TelaJavaFX extends Application{
 		jsonH = new JsonHash(hs); // adicionei as cenas criadas aqui no hash map
 		// adicionar tratamento de excecao para todos os casos
 		hs.setInsertionHash("cenaPrincipal",new PrincipalLayout(hs));
-		//MudarCena(hs.getHashScene("qualquercoisa"));
+		MudarCena(hs.getHashScene("cenaPrincipal"));
 
 	
 		primaryStage.setResizable(true);
