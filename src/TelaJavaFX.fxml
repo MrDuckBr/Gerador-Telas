@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<TilePane xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="TelaJavaFXController"
+	styleClass="geralButton">
+	
+	
+	<Button text = "Botao rere1 "
+	onAction="#clicar"
+	styleClass="buton1">
+	</Button>
+	
+	
+	<Button text = "Botao 2 "
+	onAction="#botao2">
+	</Button>
+	
+	<Button text = "Botao 3 "
+	onAction="#botao3">
+	</Button>
+	
+	<Button text = "Botao 4 "
+	onAction="#botao3">
+	</Button>
+	<Button text = "Botao 5 "
+	onAction="#botao3">
+	</Button>
+	<Button text = "Botao 6 "
+	onAction="#botao3">
+	</Button>
+	
+	
+	
+</TilePane>

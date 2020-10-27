@@ -1,0 +1,10 @@
+{
+	"nome": "Walisson",
+	"valor":"100",
+	"title": "qualquercoisa",
+	"sceneNumber": 2,
+	"creator" : [{"Scene":"Principal","objects":[{"type" : "Cena", "text" : "S", "switch": "Sala"},{"type" : "Acao", "text" : "C", "command": " Ligar Lampada"}]},
+		{"Scene":"Secundaria","objects":[{"type" : "Cena", "text" : "Salomao", "switch": "Sala"},{"type" : "Cena", "text" : "Rafael", "switch": "Sala"},{"type" : "Acao", "text" : "C", "command": " Ligar Lampada"}]}],
+	"function":["cenaPrincipal","Macarrao","Sair","co","Teste4"]
+	
+}
