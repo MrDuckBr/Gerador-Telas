@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.concurrent.BlockingDeque;
+
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
@@ -7,29 +7,28 @@ import javafx.scene.layout.TilePane;
 
 
 
-public class TilePane1  extends TilePane{
+public class TilePane1  extends TilePane {
 	JsonHash hash;
-	HashMapFunction hashmap;
-	
-	
-	TilePane1(ArrayList<String> jsonHBotoes, JsonHash hash,HashMapFunction hashMapFunction) {
+
+	TilePane1(ArrayList<String> jsonHBotoes, ArrayList<String> commands, JsonHash hash) {
 		this.hash = hash;
-		this.hashmap = hashMapFunction;
-		for(int i = 0; i < jsonHBotoes.size() ; i++) {
-			Button botao = new Button((String) jsonHBotoes.get(i));
-			//System.out.println("Funcoes" + (String)jsonHFuncoes.get(i));
+		for (int i = 0; i < jsonHBotoes.size(); i++) {
+			Button button = new Button((String) jsonHBotoes.get(i));
 			int finalI = i;
-			botao.setOnMouseClicked(e->{
-			//	hashmap.ChangeScene((String)jsonHFuncoes.get(finalI));
+			button.setOnMouseClicked(e->{
+				hash.mudarCena(commands.get(finalI));
+
 
 			});
-			getChildren().add(botao);
+			getChildren().add(button);
 		}
-
-		Button but = new Button("valor");
+	}
+}
+/*
+		Button but = new Button("Home");
 		getChildren().add(but);
 		but.setOnMouseClicked(e ->{
-			hashmap.ChangeScene("cenaPrincipal");
+			hashmap.ChangeScene("Principal");
 		});
 
 		but.getOnMouseClicked();
@@ -37,11 +36,11 @@ public class TilePane1  extends TilePane{
 	
 	
 		
-	
+	*/
 
 	
 	
 	
 	
-}
+
 

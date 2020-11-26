@@ -1,9 +1,9 @@
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
-
+/*
 public class PrincipalLayout  extends TilePane{
 	
-	HashMapFunction hashMap;
+	//HashMapFunction hashMap;
 	
 	
 	PrincipalLayout(HashMapFunction hashMap){
@@ -18,12 +18,15 @@ public class PrincipalLayout  extends TilePane{
 		this.hashMap = hashMap;
 		
 		
-	botao1.setOnMouseClicked(e->{
+	/*botao1.setOnMouseClicked(e->{
 		hashMap.ChangeScene("TilePane1");
 		
 	});
-		
+
 		getChildren().addAll(botao1,botao2,botao3,botao4,botao5,botao6);
 		
 	}
 }
+
+
+*/

@@ -1,3 +1,6 @@
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.TilePane;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -15,20 +18,22 @@ public class JsonHash {
 
 	private JSONParser parser = new JSONParser();
 	private ArrayList<String> bottoms;
-	private ArrayList<String> functions;
-	HashMapFunction hash;
+	private ArrayList<String> commands;
+	private ArrayList<String> telas;
+	private Map<String,Scene> mapScenes;
+	TelaJavaFX main;
 
 	private String title;
 
 
-	/*Abrir arquivo no proprio codigo */
-	
-	//TA ERRADISSIMO , NAO TA FUNCIONANDO NO ARQUIVO JSON
-	public JsonHash(HashMapFunction hash ) throws ParseException {
-		this.hash = hash;
+	public JsonHash(TelaJavaFX main ) throws ParseException {
+		this.main = main;
+		mapScenes = new HashMap<>();
 
 		bottoms = new ArrayList<>();
-		functions = new ArrayList<>();
+		telas = new ArrayList<>();
+		commands = new ArrayList<>();
+
 		try {
 			json = (JSONObject) parser.parse(new FileReader("src/teste.json"));
 			//System.out.println(json);
@@ -38,9 +43,9 @@ public class JsonHash {
 		}
 
 
-		insertBottomList();
-		insertFunctionList();
-		setScene();
+		readJson();
+
+
 	}
 	
 	
@@ -52,53 +57,80 @@ public class JsonHash {
 		return title;
 	}
 	
-	public void insertBottomList() throws ParseException {// DA PRA COLOCAR ARRAY , MAS AINDA NAO TESTEI ESSA MODIFICACAO
+	public void readJson() throws ParseException {
 		JSONArray jsonArray = (JSONArray) json.get("creator");
-		for (Object o : jsonArray) { // Tenho o array de objetos do "creator" , eu tenho meu array quebrado
-			//System.out.println(o.toString());
-			//System.out.println("-------------------");
-			JSONObject arrayScene = (JSONObject) parser.parse(o.toString()); // nesse parse eu transformo em JSOn
+		for (Object o : jsonArray) {
+			JSONObject arrayScene = (JSONObject) parser.parse(o.toString());
 			setTitle(arrayScene.get("Scene").toString());
+			System.out.println(getTitle());
+			telas.add(arrayScene.get("Scene").toString());
 			createScene(arrayScene);
 		}
+
+		//#verificacoes começam aqui
+		//Verificar se tem todas as telas
+		//#adicionar funcoes dos botoes
+	}
+
+	public Scene teste(){
+		return mapScenes.get("Principal");
 	}
 
 
 	public void createScene(JSONObject arrayScene) throws ParseException {
 		JSONArray objectsArray = (JSONArray) parser.parse(arrayScene.get("objects").toString());
+		System.out.println(objectsArray.size());
 		for (Object a : objectsArray) { // Pega as cenas , objetos
-			JSONObject teste = (JSONObject) parser.parse(a.toString());
-			if (teste.get("type").equals("Cena")) {
-				bottoms.add((String) teste.get("text"));
-				//System.out.println(teste.get("text") + " Impressao do text");
+			JSONObject sceneObject = (JSONObject) parser.parse(a.toString());
+			//if (teste.get("type").equals("Cena")) {
+				bottoms.add((String) sceneObject.get("text"));
+				commands.add((String) sceneObject.get("command"));
+				//ADICIONAR A FUNCAO DO BOTAO NESTE PONTO AQUI
+			//}
+		}
+	insertSceneMap(getTitle(), new TilePane1(bottoms, commands ,this));
+	}
+
+
+
+
+
+
+
+
+	public void insertSceneMap(String screen_name , TilePane tile) { //Insere a nova cena no Hash Map
+		System.out.println("Nome da tela " + screen_name);
+		mapScenes.put(screen_name, new Scene(tile));
+		//System.out.println(hash);
+		//System.out.println(screen_name);
+		//System.out.println(hash.size() + " Impressao hashmap " + hash.get(screen_name));
+	}
+
+	public void mudarCena(String cena){
+		if(existeCena(cena)) {
+			if (mapScenes.get(cena) != null) {
+				main.mudarCena(mapScenes.get(cena), cena);
+
 			}
-			//	System.out.println(teste.get("text"));
+		}else{
+			Alert AlertaMudarCena = new Alert(Alert.AlertType.ERROR);
+			AlertaMudarCena.setContentText("A cena "+ cena + " não existe");
+			AlertaMudarCena.show();
 		}
-
 	}
 
-
-	public void insertFunctionList(){ // metodo que pega a funcao dos botoes;
-		JSONArray jsonArray = (JSONArray) json.get("function");
-		for (Object o : jsonArray) {
-			//System.out.println(o);
-			functions.add((String) o);
+	public boolean existeCena(String cena){
+		for(String t : telas){
+			if(t.equals(cena)){
+				return true;
+			}
 		}
-		//System.out.println(functions);
+		return false;
 	}
-	
-	
 
-	
 
-	
-	public void setScene()  {
-		System.out.println(bottoms);
-		System.out.println(functions);
-		hash.setInsertionHash(getTitle() , new TilePane1(bottoms,this,hash));
-		
-	}
-	
-	
-	
+
+
+
+
 }
