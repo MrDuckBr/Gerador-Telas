@@ -101,9 +101,7 @@ public class JsonHash {
 	public void insertSceneMap(String screen_name , TilePane tile) { //Insere a nova cena no Hash Map
 		System.out.println("Nome da tela " + screen_name);
 		mapScenes.put(screen_name, new Scene(tile));
-		//System.out.println(hash);
-		//System.out.println(screen_name);
-		//System.out.println(hash.size() + " Impressao hashmap " + hash.get(screen_name));
+
 	}
 
 	public void mudarCena(String cena){

@@ -3,8 +3,10 @@
 	"valor":"100",
 	"title": "qualquercoisa",
 	"sceneNumber": 2,
-	"creator" : [{"Scene":"Principal","objects":[{"type" : "Cena", "text" : "Cena1", "command": "Secundaria"},{"type" : "Cena", "text" : "Cena1-botao2", "command": " Ligar Lampada"}]},
+	"creator" : [{"Scene":"Principal","objects":[{"type" : "Cena", "text" : "Cena1", "command": "Secundaria", "posicao":[0,0] , "tamanho": [1,1] , "cor": "red" },{"type" : "Cena", "text" : "Cena1-botao2", "command": " Ligar Lampada"}]},
 		{"Scene":"Secundaria","objects":[{"type" : "Cena", "text" : "Salomao", "command": "Sala"},{"type" : "Cena", "text" : "Rafael", "command": "Principal"},{"type" : "Acao", "text" : "C", "command": " Ligar Lampada"}]}],
 	"function":["cenaPrincipal","Macarrao","Sair","co","Teste4"]
 	
 }
+
+

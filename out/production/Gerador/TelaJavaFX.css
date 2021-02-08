@@ -4,5 +4,11 @@
 
 .buton1{
 	-fx-background-color: red;
-	
+
 	}
+
+
+.colorRed{
+    -fx-background-color: red;
+}
+<red : .colorRed>

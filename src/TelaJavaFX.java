@@ -2,8 +2,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.swing.text.MutableAttributeSet;
-import java.util.Scanner;
+
 
 
 //extend => HERANCA  -> descendencia de um individuo/ancestral
@@ -13,22 +12,22 @@ public class TelaJavaFX extends Application{
 	Stage primaryStage;
 	Scene cenaPrincipal;
 	JsonHash jsonH;
+//	GridPaneCreator gridPane1 = new GridPaneCreator();
 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		//hs = new HashMapFunction(this ); // criei o hash map
 		jsonH = new JsonHash(this); // adicionei as cenas criadas aqui no hash map
-		// adicionar tratamento de excecao para todos os casos
-	//	hs.setInsertionHash("cenaPrincipal",new PrincipalLayout(hs));
-	//	MudarCena(hs.getHashScene("Principal"));
-		primaryStage.setScene(jsonH.teste());
+//		primaryStage.setScene(jsonH.teste());
+//		primaryStage.setScene(gridPane1.construtor());
+//COmentei aqui porque tem que definir a primeira cena.
 
+		//FULL SCREEN
 
-
-	
-		primaryStage.setResizable(true);
+		//botao gradiente
+		//primaryStage.setFullScreen(true);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		
 	}
@@ -44,5 +43,6 @@ public class TelaJavaFX extends Application{
 	public void mudarCena(Scene tela , String nome) {
 		primaryStage.setScene(tela);
 		primaryStage.setTitle(nome);
+		primaryStage.setFullScreen(true);
 	}
 }
